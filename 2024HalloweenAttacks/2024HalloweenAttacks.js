@@ -15,8 +15,9 @@ const PROXY = {
         port: 7890,
     },
 };
-const TIMESTAMP_START = 1729850400; // Fri Oct 25 2024 10:00:00 GMT+0000
+const TIMESTAMP_START = 1729810800; // Thu Oct 24 2024 23:00:00 GMT+0000. This is the number of Oct 24 as shown in Torn web UI.
 const TIMESTAMP_END = 1730476800; // Fri Nov 01 2024 16:00:00 GMT+0000
+// https://api.torn.com/user/1512829?selections=basic,personalstats&stat=attackswon&timestamp=1729810800&key=FFTXWwo3mfiKvWDA
 
 main();
 
@@ -97,16 +98,13 @@ async function fetchAttacks(membersList) {
         let body1 = null;
         let body2 = null;
         try {
+            await sleep(1500);
             const response1 = await axios.get(
-                `https://api.torn.com/user/${member.id}?selections=basic,personalstats&stat=attackswon&timestamp=${
-                    TIMESTAMP_END / 1000
-                }&key=${API_KEY}`,
+                `https://api.torn.com/user/${member.id}?selections=basic,personalstats&stat=attackswon&timestamp=${TIMESTAMP_START}&key=${API_KEY}`,
                 PROXY
             );
             const response2 = await axios.get(
-                `https://api.torn.com/user/${member.id}?selections=basic,personalstats&stat=attackswon&timestamp=${
-                    TIMESTAMP_START / 1000
-                }&key=${API_KEY}`,
+                `https://api.torn.com/user/${member.id}?selections=basic,personalstats&stat=attackswon&key=${API_KEY}`,
                 PROXY
             );
             body1 = response1.data;
@@ -153,8 +151,6 @@ async function fetchAttacks(membersList) {
                 " FailedNum: " +
                 failedList.length
         );
-
-        await sleep(500);
     }
 
     if (failedList.length > 0) {
