@@ -1,0 +1,17 @@
+{
+  "name": "halloweenattacks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "2025HalloweenAttacks.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@aternus/csv-to-xlsx": "^3.0.2",
+    "axios": "^1.12.2",
+    "dotenv": "^17.2.3"
+  },
+  "author": "",
+  "license": "ISC"
+}
